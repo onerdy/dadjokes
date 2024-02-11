@@ -19,7 +19,6 @@ namespace dadjokes.Data
 
             using (var connection = new MySqlConnection(connectionString))
             {
-
                 var sql = "SELECT * FROM joke";
                 var jokes = await connection.QueryAsync<Joke>(sql);
                 return jokes;

@@ -1,8 +1,46 @@
 ﻿@page "/"
 
+@attribute [StreamRendering]
 
-<PageTitle>Home</PageTitle>
+@inject IJokeService _jokeService
 
-<h1>Hello, world!</h1>
+<FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
 
-Welcome to your new Fluent Blazor app.
+    <FluentLabel>Welcome to Onerdy's Dad Jokes website!</FluentLabel>
+    <br />
+
+    @if (randomJoke == null)
+    {
+        <FluentProgressRing />
+        <FluentLabel>Loading jokes...</FluentLabel>
+    }
+
+    else
+    {
+        <FluentCard Width="300px" Height="200px">
+            <FluentLabel Typo="Typography.Body" Weight="FontWeight.Bold">@randomJoke?.Question</FluentLabel>
+                <br />
+                <FluentLabel Typo="Typography.Body">@randomJoke?.Answer </FluentLabel>
+        </FluentCard>
+@*         <FluentButton OnClick="@LoadRandomJoke">Load Next Joke (Broken)</FluentButton> *@
+    }
+</FluentStack>
+
+@code {
+    private IEnumerable<Joke>? jokes;
+    private Joke? randomJoke;
+
+    protected override async Task OnInitializedAsync()
+    {
+        jokes = await _jokeService.GetAllJokes();
+        LoadRandomJoke();
+    }
+
+    private void LoadRandomJoke()
+    {
+        Random rnd = new Random();
+
+        randomJoke = jokes?.ElementAt<Joke>(rnd.Next(0, jokes.Count()));
+
+    }
+}
