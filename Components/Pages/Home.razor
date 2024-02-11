@@ -17,12 +17,19 @@
 
     else
     {
-        <FluentCard Width="300px" Height="200px">
-            <FluentLabel Typo="Typography.Body" Weight="FontWeight.Bold">@randomJoke?.Question</FluentLabel>
-                <br />
-                <FluentLabel Typo="Typography.Body">@randomJoke?.Answer </FluentLabel>
-        </FluentCard>
-@*         <FluentButton OnClick="@LoadRandomJoke">Load Next Joke (Broken)</FluentButton> *@
+        @* Using Blazor EditForm with Enhance to get basic interactivity
+            without needing SignalR WebSockets*@
+
+        <EditForm FormName="JokeForm" Model="@randomJoke" OnSubmit="@LoadRandomJoke" Enhance>
+            <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+                <FluentCard Width="300px" Height="200px">
+                    <FluentLabel Weight="FontWeight.Bold">@randomJoke?.Question</FluentLabel>
+                    <br />
+                    <FluentLabel>@randomJoke?.Answer </FluentLabel>
+                </FluentCard>
+                <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowRepeatAll())" Type="ButtonType.Submit">Load Random Joke</FluentButton>
+            </FluentStack>
+        </EditForm>
     }
 </FluentStack>
 
