@@ -22,14 +22,14 @@
                     <img src="DadJokeLogo128.png"/>
                 </div>
                 <br/>
-                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H4" >@joke?.Question</FluentLabel>
+                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H3" >@joke?.Question</FluentLabel>
                 <br />
-                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H5">@joke?.Answer </FluentLabel>
+                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H4">@joke?.Answer </FluentLabel>
             </FluentCard>
                 <FluentButton BackgroundColor="olive" OnClick="LoadNextJoke">
                 <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center">
                     <FluentIcon Color="Color.Custom" CustomColor="black" Value="@(new Icons.Regular.Size16.ArrowCounterclockwise())" />
-                    <FluentLabel Typo="Typography.H5">Load Random Joke</FluentLabel>
+                    <FluentLabel Typo="Typography.H4">Load Random Joke</FluentLabel>
                 </FluentStack>
             </FluentButton>
         </FluentStack>
