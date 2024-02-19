@@ -1,6 +1,5 @@
 using dadjokes.Components;
 using dadjokes.Data;
-using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +9,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<IJokeService, JokeService>();
-
 
 var app = builder.Build();
 

@@ -6,6 +6,6 @@ namespace dadjokes.Data
 {
     public interface IJokeService
     {
-        public Task<IEnumerable<Joke>> GetAllJokes();
+        public Task<IEnumerable<Joke>> GetAllJokesRandomized();
     }
 }

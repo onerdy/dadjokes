@@ -4,50 +4,57 @@
 
 @inject IJokeService _jokeService
 
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
 <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
 
-    <FluentLabel>Welcome to Onerdy's Dad Jokes website!</FluentLabel>
-    <br />
-
-    @if (randomJoke == null)
+    @if (jokes == null)
     {
-        <FluentProgressRing />
+        <FluentProgressRing Color="saddlebrown"/>
         <FluentLabel>Loading jokes...</FluentLabel>
     }
 
     else
     {
-        @* Using Blazor EditForm with Enhance to get basic interactivity
-            without needing SignalR WebSockets*@
-
-        <EditForm FormName="JokeForm" Model="@randomJoke" OnSubmit="@LoadRandomJoke" Enhance>
-            <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
-                <FluentCard Width="300px" Height="200px">
-                    <FluentLabel Weight="FontWeight.Bold">@randomJoke?.Question</FluentLabel>
-                    <br />
-                    <FluentLabel>@randomJoke?.Answer </FluentLabel>
-                </FluentCard>
-                <FluentButton IconStart="@(new Icons.Regular.Size16.ArrowRepeatAll())" Type="ButtonType.Submit">Load Random Joke</FluentButton>
-            </FluentStack>
-        </EditForm>
+        <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+            <FluentCard Width="300px" Height="300px" Style="background-color: floralwhite;">
+                <div style="text-align: center">
+                    <img src="DadJokeLogo128.png"/>
+                </div>
+                <br/>
+                <FluentLabel Alignment="HorizontalAlignment.Center" Weight="FontWeight.Bold">@joke?.Question</FluentLabel>
+                <br />
+                <FluentLabel Alignment="HorizontalAlignment.Center">@joke?.Answer </FluentLabel>
+            </FluentCard>
+                <FluentButton BackgroundColor="goldenrod" OnClick="LoadNextJoke">
+                <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center">
+                    <FluentIcon Color="Color.Custom" CustomColor="black" Value="@(new Icons.Regular.Size16.ArrowCounterclockwise())" />
+                        <FluentLabel Weight="FontWeight.Bold">Load Random Joke</FluentLabel>
+                </FluentStack>
+            </FluentButton>
+        </FluentStack>
     }
 </FluentStack>
 
 @code {
     private IEnumerable<Joke>? jokes;
-    private Joke? randomJoke;
+    private Joke? joke;
+    private int i;
 
     protected override async Task OnInitializedAsync()
     {
-        jokes = await _jokeService.GetAllJokes();
-        LoadRandomJoke();
+        jokes = await _jokeService.GetAllJokesRandomized();
+        i = 0;
+        joke = jokes?.ElementAt(i);     
     }
 
-    private void LoadRandomJoke()
+    private void LoadNextJoke()
     {
-        Random rnd = new Random();
-
-        randomJoke = jokes?.ElementAt<Joke>(rnd.Next(0, jokes.Count()));
-
+        i++;
+        if(i > jokes?.Count() -1)
+        {
+            i = 0;
+        }
+        joke = jokes?.ElementAt(i);
     }
 }
