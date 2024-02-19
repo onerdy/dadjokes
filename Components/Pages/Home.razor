@@ -17,19 +17,19 @@
     else
     {
         <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
-            <FluentCard Width="300px" Height="300px" Style="background-color: floralwhite;">
+            <FluentCard Width="300px" Height="300px" Style="background-color: antiquewhite;">
                 <div style="text-align: center">
                     <img src="DadJokeLogo128.png"/>
                 </div>
                 <br/>
-                <FluentLabel Alignment="HorizontalAlignment.Center" Weight="FontWeight.Bold">@joke?.Question</FluentLabel>
+                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H4" >@joke?.Question</FluentLabel>
                 <br />
-                <FluentLabel Alignment="HorizontalAlignment.Center">@joke?.Answer </FluentLabel>
+                <FluentLabel Alignment="HorizontalAlignment.Center" Typo="Typography.H5">@joke?.Answer </FluentLabel>
             </FluentCard>
                 <FluentButton BackgroundColor="goldenrod" OnClick="LoadNextJoke">
                 <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center">
                     <FluentIcon Color="Color.Custom" CustomColor="black" Value="@(new Icons.Regular.Size16.ArrowCounterclockwise())" />
-                        <FluentLabel Weight="FontWeight.Bold">Load Random Joke</FluentLabel>
+                    <FluentLabel Typo="Typography.H5">Load Random Joke</FluentLabel>
                 </FluentStack>
             </FluentButton>
         </FluentStack>
