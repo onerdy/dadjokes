@@ -10,6 +10,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSingleton<IJokeService, JokeService>();
 
+builder.Services.AddSingleton<DbConnection>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

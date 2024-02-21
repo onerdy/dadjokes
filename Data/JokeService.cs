@@ -6,20 +6,19 @@ namespace dadjokes.Data
 {
     public class JokeService : IJokeService
     {
-        private IConfiguration _config { get; }
+        private readonly DbConnection _dbConnection;
 
-        public JokeService(IConfiguration config)
+        public JokeService(DbConnection dbConnection)
         {
-            _config = config;
+            _dbConnection = dbConnection;
         }
 
         public async Task<IEnumerable<Joke>> GetAllJokesRandomized()
         {
-            using (var db = new MySqlConnection(_config.GetConnectionString("MySQL")))
+            using (var db = _dbConnection.CreateConnection())
             {
-                var sql = "SELECT * FROM joke";
-                var jokes = await db.QueryAsync<Joke>(sql);
-                var randomizedJokes = jokes.OrderBy(x => Random.Shared.Next()).ToList();
+                var sql = "SELECT * FROM joke ORDER BY RAND()";
+                var randomizedJokes = await db.QueryAsync<Joke>(sql);
                 return randomizedJokes;
             }
         }
