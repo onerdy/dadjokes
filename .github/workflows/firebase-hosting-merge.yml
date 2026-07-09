@@ -18,3 +18,10 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DADJOKES_ONERDY_COM }}
           channelId: live
           projectId: dadjokes-onerdy-com
+      - name: Deploy Firestore rules
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DADJOKES_ONERDY_COM }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/service-account.json
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/service-account.json
+          npx firebase-tools deploy --only firestore:rules --project dadjokes-onerdy-com --non-interactive
