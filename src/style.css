@@ -1,0 +1,96 @@
+:root {
+  --body-font: "Segoe UI Variable", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--body-font);
+  margin: 0;
+  background-color: antiquewhite;
+  min-height: 100dvh;
+}
+
+.header-bar {
+  height: 20px;
+}
+.header-bar.bar-1 { background-color: cadetblue; }
+.header-bar.bar-2 { background-color: olive; height: 20px; }
+.header-bar.bar-3 { background-color: goldenrod; height: 25px; }
+.header-bar.bar-4 { background-color: saddlebrown; height: 30px; }
+
+.content {
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.joke-card {
+  width: 350px;
+  height: 350px;
+  background-color: floralwhite;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.joke-card img {
+  width: 128px;
+  height: 128px;
+}
+
+.joke-question {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0;
+}
+
+.joke-answer {
+  font-size: 1.25rem;
+  margin: 0.5rem 0 0;
+}
+
+.load-joke-button {
+  margin-top: 1.5rem;
+  background-color: olive;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.load-joke-button:hover {
+  filter: brightness(1.1);
+}
+
+.loading-label {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.spinner {
+  margin-top: 2rem;
+  width: 4rem;
+  height: 4rem;
+  border: 0.5rem solid #e0e0e0;
+  border-top-color: saddlebrown;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
